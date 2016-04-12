@@ -20,6 +20,7 @@ namespace Gobang
         private int[,] board;
         private List<Chess> chesses = new List<Chess>();
         private bool player;
+        private bool gameStarted;
         private const int TOP_WHITE_SPACE = 50;
         private const int LEFT_WHITE_SPACE = 25;
         private const int ROW_SPACE = 30;
@@ -36,6 +37,7 @@ namespace Gobang
                 }
             }
             player = true;
+            gameStarted = true;
             DrawBoard();
         }
 
@@ -59,7 +61,8 @@ namespace Gobang
         public void PlaceChess(int x, int y)
         {
 
-            //x = (x-25) % 30  < 5 ？ x - (x - 25)) % 30 : x + (x - 25)) % 30;
+            if (!gameStarted) return;
+
             if ((x - LEFT_WHITE_SPACE) % ROW_SPACE < ROW_SPACE / 2) x -= (x - LEFT_WHITE_SPACE) % ROW_SPACE;
             else x = x - (x - LEFT_WHITE_SPACE) % ROW_SPACE + ROW_SPACE;
 
@@ -95,7 +98,7 @@ namespace Gobang
                 for (int j = 0; j < 15; j++)
                 {
                     if (board[i, j] == 0) count = 0;
-                    if (board[i, j] != player)
+                    else if (board[i, j] != player)
                     {
                         if (board[i, j] == 1)
                         {
@@ -114,6 +117,8 @@ namespace Gobang
                     {
                         if (player == 1) MessageBox.Show("Black Win");
                         else if (player == 2) MessageBox.Show("White Win");
+                        gameStarted = false;
+                        return;
                     }
                 }
             }
@@ -124,7 +129,8 @@ namespace Gobang
                 int count = 0;
                 for (int j = 0; j < 15; j++)
                 {
-                    if (board[j, i] != player)
+                    if (board[i, j] == 0) count = 0;
+                    else if (board[j, i] != player)
                     {
                         if (board[j, i] == 1)
                         {
@@ -143,6 +149,8 @@ namespace Gobang
                     {
                         if (player == 1) MessageBox.Show("Black Win");
                         else if (player == 2) MessageBox.Show("White Win");
+                        gameStarted = false;
+                        return;
                     }
                 }
             }
@@ -156,7 +164,8 @@ namespace Gobang
                 int row = 0;
                 for (int column = i; column < 15; column++)
                 {
-                    if (board[column, row] != player)
+                    if (board[column, row] == 0) count = 0;
+                    else if (board[column, row] != player)
                     {
                         if (board[column, row] == 1)
                         {
@@ -175,6 +184,8 @@ namespace Gobang
                     {
                         if (player == 1) MessageBox.Show("Black Win");
                         else if (player == 2) MessageBox.Show("White Win");
+                        gameStarted = false;
+                        return;
                     }
                     row++;
                 }
@@ -186,7 +197,8 @@ namespace Gobang
                 int row = 14;
                 for (int column = i; column > 0; column--)
                 {
-                    if (board[column, row] != player)
+                    if (board[column, row] == 0) count = 0;
+                    else if (board[column, row] != player)
                     {
                         if (board[column, row] == 1)
                         {
@@ -205,6 +217,8 @@ namespace Gobang
                     {
                         if (player == 1) MessageBox.Show("Black Win");
                         else if (player == 2) MessageBox.Show("White Win");
+                        gameStarted = false;
+                        return;
                     }
                     row--;
                 }
@@ -217,7 +231,8 @@ namespace Gobang
                 int row = 0;
                 for (int column = i; column > 0; column--)
                 {
-                    if (board[column, row] != player)
+                    if (board[column, row] == 0) count = 0;
+                    else if (board[column, row] != player)
                     {
                         if (board[column, row] == 1)
                         {
@@ -236,6 +251,8 @@ namespace Gobang
                     {
                         if (player == 1) MessageBox.Show("Black Win");
                         else if (player == 2) MessageBox.Show("White Win");
+                        gameStarted = false;
+                        return;
                     }
                     row++;
                 }
@@ -247,7 +264,8 @@ namespace Gobang
                 int row = 14;
                 for (int column = i; column < 15; column++)
                 {
-                    if (board[column, row] != player)
+                    if (board[column, row] == 0) count = 0;
+                    else if (board[column, row] != player)
                     {
                         if (board[column, row] == 1)
                         {
@@ -266,6 +284,8 @@ namespace Gobang
                     {
                         if (player == 1) MessageBox.Show("Black Win");
                         else if (player == 2) MessageBox.Show("White Win");
+                        gameStarted = false;
+                        return;
                     }
                     row--;
                 }
